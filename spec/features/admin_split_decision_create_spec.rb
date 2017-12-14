@@ -27,6 +27,9 @@ RSpec.describe 'split decision flow' do
     expect(Assignment.where(variant: "hammer_time").count).to eq 5
     expect(Assignment.where(variant: "touch_this").count).to eq 0
 
+    expect(split_page).to have_no_undecide_split
+    expect(split_page).to have_change_weights
+
     split_page.decide_split.click
     expect(split_decision_page).to be_displayed
 
@@ -37,6 +40,10 @@ RSpec.describe 'split decision flow' do
 
     expect(split_page).to be_displayed
     expect(split_page).to have_content "Queued decision"
+
+    expect(split_page).to have_no_decide_split
+    expect(split_page).to have_undecide_split
+    expect(split_page).to have_no_change_weights
 
     Delayed::Worker.new.work_off
 

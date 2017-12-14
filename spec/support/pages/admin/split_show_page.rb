@@ -6,6 +6,7 @@ class AdminSplitShowPage < SitePrism::Page
   element :change_weights, ".change-weights-link"
   element :add_details, ".add-details-link"
   element :decide_split, ".decide-split-link"
+  element :undecide_split, ".undecide-split-link"
   element :upload_new_assignments, ".upload-new-assignments-link"
 
   section :test_overview, ".fs-SplitOverview" do

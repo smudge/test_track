@@ -1,7 +1,11 @@
 <article class="InfoCard InfoCard--constrained sc-m-v--l">
   <div class="InfoCard-header">
     <h4>Split Details</h4>
-    <%= link_to "Decide Split", new_admin_split_decision_path(@split), class: 'decide-split-link button' %>
+    <% if @split.decided_at? %>
+      <%= link_to "Un-Decide Split", '#', class: 'undecide-split-link button secondary' %>
+    <% else %>
+      <%= link_to "Decide Split", new_admin_split_decision_path(@split), class: 'decide-split-link button' %>
+    <% end %>
   </div>
   <hr class="InfoCard-divider">
   <div class="InfoCard-description">
