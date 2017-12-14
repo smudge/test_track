@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501180350) do
+ActiveRecord::Schema.define(version: 20171214211749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 20170501180350) do
     t.string   "owner"
     t.string   "location"
     t.integer  "platform"
+    t.datetime "decided_at"
     t.index ["name"], name: "index_splits_on_name", unique: true, using: :btree
     t.index ["owner_app_id"], name: "index_splits_on_owner_app_id", using: :btree
   end
