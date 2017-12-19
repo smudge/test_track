@@ -42,6 +42,10 @@ class Split < ActiveRecord::Base
     registry[variant]
   end
 
+  def decided_variant
+    registry.key(100) if decided_at? # FIXME: If decisions are final, we could preserve previous split ratio and store decision in DB.
+  end
+
   def finished?
     finished_at.present?
   end

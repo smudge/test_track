@@ -29,5 +29,20 @@ RSpec.describe Api::V1::IdentifierVisitorsController, type: :controller do
       expect(response_json['id']).to eq identifier.visitor.id
       expect(response_json['assignments']).to eq([])
     end
+
+    context 'when split is decided' do
+      let(:split) { FactoryBot.create(:split, :decided, name: 'what_time_is_it') }
+
+      it 'responds with a visitor with decided assignments' do
+        get :show, params: { identifier_type_name: 'clown_id', identifier_value: '1234' }
+
+        expect(response).to have_http_status :ok
+        expect(response_json['id']).to eq assignment.visitor.id
+        expect(response_json['assignments'][0]['split_name']).to eq('what_time_is_it')
+        expect(response_json['assignments'][0]['variant']).to eq('touch_this')
+        expect(response_json['assignments'][0]['unsynced']).to eq(false)
+        expect(response_json['assignments'][0]['context']).to eq('the_context')
+      end
+    end
   end
 end

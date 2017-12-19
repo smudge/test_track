@@ -36,8 +36,12 @@ class Assignment < ActiveRecord::Base
   end
   alias unsynced unsynced?
 
+  def variant_or_decision
+    split.decided_at? ? split.decided_variant : variant
+  end
+
   def self.to_hash
-    Hash[all.includes(:split).map { |a| [a.split.name.to_sym, a.variant.to_sym] }]
+    Hash[all.includes(:split).map { |a| [a.split.name.to_sym, a.variant_or_decision.to_sym] }]
   end
 
   private
