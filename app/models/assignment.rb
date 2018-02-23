@@ -37,7 +37,7 @@ class Assignment < ActiveRecord::Base
   alias unsynced unsynced?
 
   def variant_or_decision
-    split.decided_at? ? split.decided_variant : variant
+    split.decided_at? ? split.deciding_variant : variant
   end
 
   def self.to_hash
