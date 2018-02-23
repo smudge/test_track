@@ -1,5 +1,6 @@
 class Split < ActiveRecord::Base
   belongs_to :owner_app, required: true, class_name: "App"
+  belongs_to :deciding_admin, required: false, class_name: 'Admin'
 
   has_many :previous_split_registries
   has_many :assignments
@@ -69,13 +70,10 @@ class Split < ActiveRecord::Base
     assignments.where(variant: variant).count(:id)
   end
 
-  def build_decision(params = {})
-    Decision.new({ split: self }.merge(params))
+  def decide!(variant:, admin:)
+    update!(decided_at: Time.zone.now, deciding_variant: variant, deciding_admin: admin)
   end
 
-  def create_decision!(params = {})
-    build_decision(params).tap(&:save!)
-  end
 
   private
 

@@ -6,12 +6,11 @@ class Admin::DecisionsController < AuthenticatedAdminController
 
   def create
     split = Split.find params[:split_id]
-    Split.transaction do
-      split.update!(decided_at: Time.zone.now)
-      CreateDecisionJob.perform_later(split, variant: target_variant, admin: current_admin)
+    split_decision = Decision.new(split: split, variant: target_variant, admin: current_admin)
+    unless split_decision.save
+      flash[:error] = 'There was an issue deciding this split.'
     end
-    flash[:success] = "Queued decision to reassign all visitors to #{target_variant}"
-    redirect_to admin_split_path(split)
+    redirect_to [:admin, split]
   end
 
   private

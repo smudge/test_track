@@ -145,6 +145,8 @@ ActiveRecord::Schema.define(version: 20171214211749) do
     t.string   "location"
     t.integer  "platform"
     t.datetime "decided_at"
+    t.integer  "deciding_admin_id"
+    t.string   "deciding_variant"
     t.index ["name"], name: "index_splits_on_name", unique: true, using: :btree
     t.index ["owner_app_id"], name: "index_splits_on_owner_app_id", using: :btree
   end
