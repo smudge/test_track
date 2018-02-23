@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <td>Status</td>
-        <td class="u-status--<%= @split.finished? ? 'finished' : 'active' %>"><%= @split.finished? ? 'Finished' : 'Active' %><span class="sc-p--s">🏁</span></td>
+        <td class="u-status--<%= @split.status %>"><%= @split.status.titleize %><span class="sc-p--s">🏁</span></td>
         <td>&nbsp;</td>
       </tr>
       <tr>

@@ -70,6 +70,15 @@ class Split < ActiveRecord::Base
     update!(decided_at: Time.zone.now, deciding_variant: variant, deciding_admin: admin)
   end
 
+  def status
+    if finished?
+      'finished'
+    elsif decided_at?
+      'decided'
+    else
+      'active'
+    end
+  end
 
   private
 

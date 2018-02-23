@@ -6,6 +6,10 @@
   &--active {
     color: $green !important;
   }
+
+  &--decided {
+    color: $orange !important;
+  }
 }
 
 .u-center {
